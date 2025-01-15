@@ -150,3 +150,29 @@ resource "aws_iam_role" "ecr-role" {
     IAC = "True"
   }
 }
+
+
+resource "aws_iam_role" "tf-role" {
+  name = "tf-role"
+  assume_role_policy = jsonencode({
+    Statement = [
+      {
+        Action = "sts:AssumeRoleWithWebIdentity"
+        Condition = {
+          StringEquals = {
+            "token.actions.githubusercontent.com:aud" = "sts.amazonaws.com"
+            "token.actions.githubusercontent.com:sub" = "repo:NinjaAzul/project-01-devops:ref:refs/heads/main"
+          }
+        }
+        Effect = "Allow"
+        Principal = {
+          Federated = "arn:aws:iam::${var.aws_account_id}:oidc-provider/token.actions.githubusercontent.com"
+        }
+      }
+    ]
+    Version = "2012-10-17"
+  })
+  tags = {
+    IAC = "True"
+  }
+}
