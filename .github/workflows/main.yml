@@ -41,6 +41,7 @@ jobs:
             -var="aws_account_id=${{ secrets.AWS_ACCOUNT_ID }}"
 
       - name: Terraform apply
+        if: github.ref == 'refs/heads/main' && github.event_name == 'push'
         run: |
           terraform apply -auto-approve \
             -var="aws_account_id=${{ secrets.AWS_ACCOUNT_ID }}"
