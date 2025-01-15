@@ -1,7 +1,7 @@
-resource "aws_s3_bucket" "bucket" {
-  bucket = "bucket-iac-devops-learning-test"
+# resource "aws_s3_bucket" "bucket" {
+#   bucket = "bucket-iac-devops-learning-test"
 
-  tags = {
-    IAC = "True"
-  }
-}
+#   tags = {
+#     IAC = "True"
+#   }
+# }
