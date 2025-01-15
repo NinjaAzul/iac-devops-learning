@@ -172,6 +172,32 @@ resource "aws_iam_role" "tf-role" {
     ]
     Version = "2012-10-17"
   })
+
+  inline_policy {
+    name = "tf-permissions"
+    policy = jsonencode({
+      Statement = [{
+        Sid      = "Statement1"
+        Action   = "ecr:*"
+        Effect   = "Allow"
+        Resource = "*"
+        },
+        {
+          Sid      = "Statement2"
+          Action   = "iam:*"
+          Effect   = "Allow"
+          Resource = "*"
+        },
+        {
+          Sid      = "Statement3"
+          Action   = "s3:*"
+          Effect   = "Allow"
+          Resource = "*"
+        }
+      ]
+    })
+  }
+
   tags = {
     IAC = "True"
   }
